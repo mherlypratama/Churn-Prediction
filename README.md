@@ -272,13 +272,8 @@ Alternatively, if running via command-line interface or automated script:
 
 ## 9. Repository Structure
 
-- **data/**
-  - `WA_Fn-UseC_-Telco-Customer-Churn.csv` — Raw Dataset
-- **notebooks/**
-  - `telco_churn_experimentation.ipynb` — Complete Jupyter Notebook Pipeline
-- **src/**
-  - `preprocessing.py` — OHE and Ordinal Encoding Transformers
-  - `models.py` — ML and ANN v2 Architecture Definitions
-  - `evaluation.py` — Benchmarking & Metrics Exporters
-- `requirements.txt` — Project Dependencies
+- **Scripts/**
+  - `data.csv` — Raw Dataset
+- **Scripts/**
+  - `ChurnPrediction.ipynb` — Complete Jupyter Notebook Pipeline
 - `README.md` — Complete Documentation
