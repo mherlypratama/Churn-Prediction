@@ -123,3 +123,92 @@ flowchart TD
     G1 & G2 & G3 & J1 & J2 & J3 --> K[Consolidated Model Evaluation & Benchmarking]
     K --> L[Business Trade-Off & Recommendation Framework]
 ```
+
+---
+
+## 1. Data Cleaning & Preprocessing
+
+The dataset consists of Telco customer records containing demographic, account, and service usage attributes. Preprocessing steps applied prior to modeling include:
+
+- **Handling Missing & Invalid Values:**
+  - `TotalCharges` contained whitespace strings for new customers with `tenure = 0`. These values were coerced to numeric `0.0`.
+- **Feature Hygiene:**
+  - Non-informative unique identifiers (`customerID`) were removed.
+  - Categorical redundancies were standardized (e.g., `'No internet service'` and `'No phone service'` were mapped to `'No'`).
+- **Data Splitting:**
+  - The dataset was partitioned into Training (80%) and Test (20%) sets using stratified sampling to preserve the target class balance ($y = \text{Churn}$).
+
+---
+
+## 2. Feature Encoding Strategy: Scenario 1 vs. Scenario 2
+
+To evaluate the impact of feature matrix dimensionality on model partition decisions, two distinct encoding approaches were engineered:
+
+### Scenario 1: One-Hot Encoding (OHE)
+
+- Categorical attributes were transformed into dummy binary variables, expanding the feature space from **19 to 23 features**.
+- **Impact:** Created high-dimensional sparse representations, causing feature fragmentation during tree-node splits in ensemble algorithms.
+
+### Scenario 2: Ordinal Encoding (Native Feature Preservation)
+
+- Categorical features were ordinal-encoded within their single native columns, preserving the **19-feature shape**.
+- Numerical features (`tenure`, `MonthlyCharges`, `TotalCharges`) were normalized using `StandardScaler`.
+- **Impact:** Retained structural feature integrity, allowing tree-based algorithms (XGBoost, LightGBM, Random Forest) to evaluate split boundaries holistically.
+
+---
+
+## 3. Class Imbalance Mitigation Approaches
+
+The target variable exhibits a class imbalance ratio of approximately **73:27** (Majority Class `0` vs. Minority Class `1`). Two primary techniques were benchmarked:
+
+1. **Synthetic Minority Over-sampling Technique (SMOTE):**
+   - Applied exclusively to training partitions (`X_train_resampled`) for linear models (Logistic Regression), bagging trees (Random Forest), and initial deep neural networks (ANN v1).
+2. **Cost-Sensitive Weight Scaling (`scale_pos_weight` & `class_weight`):**
+   - Applied to gradient boosting algorithms (XGBoost & LightGBM) and optimized neural networks (ANN v2) using the original unsampled training data.
+   - **Weight Ratio Formulation:**
+     $$\text{scale\_pos\_weight} = \frac{N_{\text{majority}}}{N_{\text{minority}}} = \frac{3163}{1137} \approx 2.78$$
+
+---
+
+## 4. Modeling Exploration & Hyperparameter Tuning
+
+Tuning was executed using `RandomizedSearchCV` across 5-fold cross-validation with an emphasis on maximizing the **ROC-AUC** and **Recall** metrics.
+
+### Model Families & Optimization Tactics:
+
+- **Logistic Regression:** Tuned L2 regularization penalties (`C`) and solvers (`lbfgs`, `liblinear`).
+- **Random Forest:** Applied tree depth pruning (`max_depth`), `min_samples_split`, and estimator optimization to prevent fitting on synthetic SMOTE noise.
+- **XGBoost & LightGBM:** Tuned learning rates (`learning_rate`), tree depths (`max_depth`), subsample ratios, and `scale_pos_weight` values across both encoding scenarios.
+- **Deep Learning (ANN v1 vs. ANN v2 Optimization):**
+  - **ANN v1 (SMOTE Baseline):** 3-layer MLP using ReLU activations and standard binary crossentropy trained on SMOTE data.
+  - **ANN v2 (Class-Weighted & Tuned):** Architecture built with `Swish` activation layers, Batch Normalization, cost-sensitive `class_weight` tuning ($0:0.68, 1:1.88$), and probability threshold calibration ($0.48$).
+
+---
+
+## 5. Comprehensive Model Evaluation & Benchmarking
+
+All models were evaluated on the held-out original test set ($N = 1,409$). The table below summarizes performance trajectories across both experimental scenarios:
+
+| Model                      |         Scenario         |   Data Strategy   |  Accuracy  | Precision  |   Recall   |  F1-Score  |  ROC-AUC   |
+| :------------------------- | :----------------------: | :---------------: | :--------: | :--------: | :--------: | :--------: | :--------: |
+| **LightGBM**               | **Scenario 2 (Ordinal)** |   **ORIGINAL**    | **0.7523** | **0.5217** | **0.8021** | **0.6322** | **0.8409** |
+| **XGBoost**                | **Scenario 2 (Ordinal)** |   **ORIGINAL**    | **0.7495** | **0.5183** | **0.7968** | **0.6280** | **0.8426** |
+| **Deep Learning (ANN v2)** | **Scenario 2 (Ordinal)** | **CLASS WEIGHTS** | **0.7459** | **0.5139** | **0.7914** | **0.6232** | **0.8331** |
+| **Random Forest**          |   Scenario 2 (Ordinal)   |       SMOTE       |   0.7686   |   0.5494   |   0.7139   |   0.6209   |   0.8371   |
+| **Logistic Regression**    |     Scenario 1 (OHE)     |       SMOTE       |   0.7374   |   0.5034   |   0.7941   |   0.6162   |   0.8391   |
+| **Deep Learning (ANN v1)** |     Scenario 1 (OHE)     |       SMOTE       |   0.7693   |   0.5534   |   0.6791   |   0.6098   |   0.8283   |
+| **LightGBM**               |     Scenario 1 (OHE)     |     ORIGINAL      |   0.8062   |   0.6735   |   0.5241   |   0.5895   |   0.8468   |
+| **XGBoost**                |     Scenario 1 (OHE)     |     ORIGINAL      |   0.8034   |   0.6702   |   0.5107   |   0.5797   |   0.8475   |
+
+---
+
+## 6. Business Impact & Decision Framework
+
+The empirical results provide a flexible deployment matrix based on organizational retention budgets:
+
+1. **High-Recall Retention Strategy (Low-Cost Interventions):**
+   - **Champion Model:** **LightGBM (Scenario 2)** or **XGBoost (Scenario 2)**.
+   - **Business Justification:** Captures **~80% of potential churners** (Recall: 80.21%). Recommended when retention campaigns have low unit costs (e.g., automated email promotions or loyalty points), ensuring maximum churn prevention.
+2. **High-Precision Retention Strategy (High-Cost Interventions):**
+   - **Alternative Model:** **LightGBM (Scenario 1)**.
+   - **Business Justification:** Delivers **67.35% Precision**, minimizing False Positives. Recommended when retention interventions are expensive (e.g., substantial bill credits or direct account manager contact), preventing wasted spend on non-churners.
