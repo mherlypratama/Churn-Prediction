@@ -212,3 +212,73 @@ The empirical results provide a flexible deployment matrix based on organization
 2. **High-Precision Retention Strategy (High-Cost Interventions):**
    - **Alternative Model:** **LightGBM (Scenario 1)**.
    - **Business Justification:** Delivers **67.35% Precision**, minimizing False Positives. Recommended when retention interventions are expensive (e.g., substantial bill credits or direct account manager contact), preventing wasted spend on non-churners.
+
+---
+
+## 7. Project Requirements & Environment Setup
+
+To replicate the experimentation pipeline, ensure Python version **3.8+** (recommended: Python 3.10+) is installed along with the required machine learning and deep learning dependencies.
+
+### Dependencies & Core Libraries
+
+Create a `requirements.txt` file in your project root with the following contents:
+
+- `numpy>=1.23.0`
+- `pandas>=1.5.0`
+- `scikit-learn>=1.2.0`
+- `lightgbm>=3.3.0`
+- `xgboost>=1.7.0`
+- `imbalanced-learn>=0.10.0`
+- `tensorflow>=2.11.0`
+- `matplotlib>=3.6.0`
+- `seaborn>=0.12.0`
+
+---
+
+## 8. Instructions & How to Run the Code
+
+Follow the step-by-step instructions below to clone the repository, set up the virtual environment, execute the end-to-end training notebook, and reproduce the model benchmarking tables.
+
+### Step 1: Clone the Repository
+
+- `git clone [https://github.com/your-username/telco-churn-prediction.git](https://github.com/your-username/telco-churn-prediction.git)`
+- `cd telco-churn-prediction`
+
+### Step 2: Create and Activate a Virtual Environment
+
+- **On macOS/Linux:**
+  - `python3 -m venv venv`
+  - `source venv/bin/activate`
+- **On Windows (Command Prompt / PowerShell):**
+  - `python -m venv venv`
+  - `.\venv\Scripts\activate`
+
+### Step 3: Install Required Packages
+
+- `pip install --upgrade pip`
+- `pip install -r requirements.txt`
+
+### Step 4: Execute the Training & Evaluation Pipeline
+
+Launch Jupyter Notebook / JupyterLab and execute the primary notebook sequentially:
+
+- `jupyter notebook telco_churn_experimentation.ipynb`
+
+Alternatively, if running via command-line interface or automated script:
+
+- `python run_experiments.py`
+
+---
+
+## 9. Repository Structure
+
+- **data/**
+  - `WA_Fn-UseC_-Telco-Customer-Churn.csv` — Raw Dataset
+- **notebooks/**
+  - `telco_churn_experimentation.ipynb` — Complete Jupyter Notebook Pipeline
+- **src/**
+  - `preprocessing.py` — OHE and Ordinal Encoding Transformers
+  - `models.py` — ML and ANN v2 Architecture Definitions
+  - `evaluation.py` — Benchmarking & Metrics Exporters
+- `requirements.txt` — Project Dependencies
+- `README.md` — Complete Documentation
