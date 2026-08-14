@@ -166,7 +166,7 @@ The target variable exhibits a class imbalance ratio of approximately **73:27** 
 2. **Cost-Sensitive Weight Scaling (`scale_pos_weight` & `class_weight`):**
    - Applied to gradient boosting algorithms (XGBoost & LightGBM) and optimized neural networks (ANN v2) using the original unsampled training data.
    - **Weight Ratio Formulation:**
-     \text{scale_pos_weight} = \frac{\text{N}_{\text{majority}}}{\text{N}_{\text{minority}}} = \frac{3163}{1137} \approx 2.78
+     scale_pos_weight = N_majority / N_minority = 3163 / 1137 ≈ 2.78
 
 ---
 
