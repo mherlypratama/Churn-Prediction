@@ -77,3 +77,49 @@ The dataset contains **7,043 customer records** with **21 feature columns**, cap
 3. **Machine Learning & Deep Learning Benchmarks:** A structured comparison matrix comparing evaluation metrics (Accuracy, Precision, Recall, F1-Score, ROC-AUC) across multiple models.
 4. **Tuned & Finalized Prediction Model:** An optimized, production-ready model artifact capable of predicting churn probability for new customer data.
 5. **Business Recommendations:** Practical data-driven strategies to improve customer retention based on feature importance and model insights.
+
+# End-to-End Customer Churn Prediction & Model Optimization
+
+## Executive Summary
+
+Customer churn poses a critical financial risk in the telecommunications industry, where acquiring new customers costs significantly more than retaining existing ones. This project delivers an end-to-end Machine Learning and Deep Learning pipeline designed to identify potential churners early, enabling data-driven customer retention strategies.
+
+Rather than relying on a single baseline, this repository documents an empirical, hypothesis-driven experimentation framework comparing:
+
+1. **Feature Engineering Strategies:** One-Hot Encoding (23 features) vs. Ordinal Encoding (19 native features).
+2. **Imbalance Mitigation:** Synthetic Oversampling (SMOTE) vs. Cost-Sensitive Weighting (`scale_pos_weight` / `class_weight`).
+3. **Model Families:** Regularized Linear Models (Logistic Regression), Bagging (Random Forest), Gradient Boosting (XGBoost & LightGBM), and Deep Neural Networks (Multi-Layer Perceptron).
+
+---
+
+## Technical Pipeline & Experiment Architecture
+
+```mermaid
+flowchart TD
+    A[Raw Telco Dataset] --> B[Data Preprocessing & Cleaning]
+    B --> C[Dataset Splitting: Train / Test]
+
+    C --> D{Feature Encoding Experiment Strategy}
+
+    %% Scenario 1 Path
+    D -->|Scenario 1| E[One-Hot Encoding\n23 Features Matrix]
+    E --> F1[SMOTE Resampling]
+    E --> F2[Original Unsampled Data]
+
+    F1 --> G1[Baseline & Hyperparameter Tuning:\nLogistic Regression, Random Forest]
+    F1 --> G2[Deep Learning ANN v1\nDefault Sigmoid @ 0.5]
+    F2 --> G3[Hyperparameter Tuning:\nXGBoost, LightGBM + scale_pos_weight]
+
+    %% Scenario 2 Path
+    D -->|Scenario 2| H[Ordinal Encoding\n19 Native Features Matrix]
+    H --> I1[SMOTE Resampling]
+    H --> I2[Original Unsampled Data]
+
+    I1 --> J1[Evaluations:\nLogistic Regression, Random Forest]
+    I2 --> J2[Evaluations:\nXGBoost, LightGBM + scale_pos_weight]
+    I2 --> J3[Optimized Deep Learning ANN v2:\nClass Weights + Swish + Threshold Calibration @ 0.48]
+
+    %% Final Benchmarking
+    G1 & G2 & G3 & J1 & J2 & J3 --> K[Consolidated Model Evaluation & Benchmarking]
+    K --> L[Business Trade-Off & Recommendation Framework]
+```
