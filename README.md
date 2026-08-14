@@ -10,7 +10,11 @@
 
 # <div align="center">Customer Churn Prediction: Machine Learning & Deep Learning Approach</div>
 
+<div align="center">
+
 ![intro](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/churn.jpg)
+
+</div>
 
 ## About The Project
 
