@@ -262,11 +262,7 @@ Follow the step-by-step instructions below to clone the repository, set up the v
 
 Launch Jupyter Notebook / JupyterLab and execute the primary notebook sequentially:
 
-- `jupyter notebook telco_churn_experimentation.ipynb`
-
-Alternatively, if running via command-line interface or automated script:
-
-- `python run_experiments.py`
+- `jupyter notebook ChurnPrediction.ipynb`
 
 ---
 
