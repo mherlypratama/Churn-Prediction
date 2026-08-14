@@ -273,3 +273,19 @@ Launch Jupyter Notebook / JupyterLab and execute the primary notebook sequential
 - **Scripts/**
   - `ChurnPrediction.ipynb` — Complete Jupyter Notebook Pipeline
 - `README.md` — Complete Documentation
+
+### Feedback
+
+If you have any feedback, please reach out at mherlypratama.eng@gmail.com
+
+### 🚀 About Me
+
+#### Hi, I'm Herly! 👋
+
+I am an AI Enthusiast and Data science & ML practitioner
+
+[1]: https://github.com/mherlypratama
+[2]: https://www.linkedin.com/in/mherlypratama/
+
+[![github](https://raw.githubusercontent.com/Pradnya1208/Telecom-Customer-Churn-prediction/c292abd3f9cc647a7edc0061193f1523e9c05e1f/icons/git.svg)][1]
+[![linkedin](https://raw.githubusercontent.com/Pradnya1208/Telecom-Customer-Churn-prediction/9f5c4a255972275ced549ea6e34ef35019166944/icons/iconmonstr-linkedin-5.svg)][2]
