@@ -7,9 +7,10 @@
 [![linkedin](https://raw.githubusercontent.com/Pradnya1208/Telecom-Customer-Churn-prediction/9f5c4a255972275ced549ea6e34ef35019166944/icons/iconmonstr-linkedin-5.svg)][2]
 
 </div>
-<div align="center">Customer Churn Prediction: Machine Learning & Deep Learning Approach</div>
 
-[intro](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/churn.jpg)
+# <div align="center">Customer Churn Prediction: Machine Learning & Deep Learning Approach</div>
+
+![intro](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/churn.jpg)
 
 ## About The Project
 
