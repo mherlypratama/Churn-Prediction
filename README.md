@@ -90,6 +90,39 @@ Rather than relying on a single baseline, this repository documents an empirical
 2. **Imbalance Mitigation:** Synthetic Oversampling (SMOTE) vs. Cost-Sensitive Weighting (`scale_pos_weight` / `class_weight`).
 3. **Model Families:** Regularized Linear Models (Logistic Regression), Bagging (Random Forest), Gradient Boosting (XGBoost & LightGBM), and Deep Neural Networks (Multi-Layer Perceptron).
 
+# Exploratory Data Analysis
+
+## Customer Churn Dynamics by Tenure
+
+<div align="center">
+
+![tenure1](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity1.png)
+![tenure2](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity2.png)
+![tenure3](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity3.png)
+
+</div>
+
+The exploratory analysis of customer tenure (`tenure`) reveals a strong inverse relationship between duration of service and churn probability.
+
+#### 1. The "Early-Stage Danger Zone" (Month 1–5)
+
+- **Extreme Initial Spike:** Churn rate peaks dramatically at **Month 1 (~60%)** and remains critical throughout the first 5 months (**Month 1–5 Critical Retention Window**).
+- **First-Year Decay:** As shown in the density plot (right), the distribution of churned customers (`Churn = 1`) is heavily right-skewed and concentrated in the early months ($tenure \le 12$).
+- **Business Root Cause:** This pattern indicates significant friction during onboarding, early service dissatisfaction, or aggressive competitor poaching targeting new sign-ups.
+  a
+
+#### 2. Long-Term Customer Loyalty & Stabilization (Month 24+)
+
+- **Gradual Decline:** Beyond the 12-month mark, churn rates drop consistently, stabilizing below **20%** after 30 months.
+- **High Loyalty Retention:** Customers who reach a tenure of **60+ months (5 years)** exhibit minimal churn risk ($< 10\%$). The density curve for retained customers (`Churn = 0`) shows a prominent peak around 70 months, representing high-lifetime-value (LTV) loyal accounts.
+
+---
+
+### Actionable Business Recommendations
+
+- **Targeted Early Retention Campaigns:** Shift retention budgets away from long-term accounts ($tenure > 24$) and focus heavily on the **Month 1–6 window**.
+- **Onboarding Interventions:** Implement proactive customer check-ins, onboarding support, and targeted discounts around Month 1, Month 3, and Month 6 to bridge customers past the initial attrition cliff.
+
 ---
 
 ## Technical Pipeline & Experiment Architecture
