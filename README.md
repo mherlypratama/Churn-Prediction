@@ -178,6 +178,31 @@ To understand the critical attrition windows, customer churn rate was evaluated 
 
 ---
 
+## Overall Class Distribution
+
+Before executing machine learning pipeline experiments, the target class distribution ($y = \text{Churn}$) was analyzed to determine dataset balance and guide imbalance mitigation strategies.
+
+### Visual Analysis: Overall Customer Churn Ratio
+
+- **Retained Customers (Class 0):** Represent the clear majority of the dataset at **73.5% (5,174 customers)**.
+- **Churned Customers (Class 1):** Comprise the minority class at **26.5% (1,869 customers)**.
+- **Class Ratio:** The dataset exhibits a baseline class imbalance ratio of approximately **2.77 : 1** (or ~73:27).
+
+---
+
+### Core Business & Modeling Implications
+
+1. **Target Class Imbalance Detection:**
+   - Standard accuracy metrics will be misleading. A naive model predicting all accounts as "Retained" would achieve a deceptively high baseline accuracy of **73.5%** while completely failing to identify actual churn risks.
+2. **Justification for Advanced Resampling & Weight Scaling:**
+   - The ~26.5% minority representation confirms the necessity of class imbalance techniques implemented in subsequent modeling phases:
+     - **Cost-Sensitive Weighting:** Calculating `scale_pos_weight` ($\approx 2.78$) for gradient boosting models (XGBoost & LightGBM) to penalize False Negative errors.
+     - **Synthetic Sampling:** Applying SMOTE on linear models (Logistic Regression) and baseline ANNs to prevent voting bias toward the majority class.
+3. **Metric Selection:**
+   - Evaluation focus must shift away from Accuracy toward **Recall** (capturing maximum churners), **F1-Score**, and **ROC-AUC** to balance precision-recall trade-offs effectively.
+
+---
+
 ## Technical Pipeline & Experiment Architecture
 
 ```mermaid
