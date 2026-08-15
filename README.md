@@ -97,10 +97,26 @@ Rather than relying on a single baseline, this repository documents an empirical
 <div align="center">
 
 ![tenure1](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity1.png)
-![tenure2](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity2.png)
-![tenure3](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity3.png)
+
+<!-- ![tenure2](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity2.png)
+![tenure3](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity3.png) -->
 
 </div>
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity2.png" width="400" alt="Gambar Kiri">
+      <br>
+      <sub>Early-Stage Customer</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/mherlypratama/Churn-Prediction/blob/main/output/tenuredencity3.png" width="400" alt="Gambar Kanan">
+      <br>
+      <sub>Long-Term Customer</sub>
+    </td>
+  </tr>
+</table>
 
 The exploratory analysis of customer tenure (`tenure`) reveals a strong inverse relationship between duration of service and churn probability.
 
