@@ -90,9 +90,9 @@ Rather than relying on a single baseline, this repository documents an empirical
 2. **Imbalance Mitigation:** Synthetic Oversampling (SMOTE) vs. Cost-Sensitive Weighting (`scale_pos_weight` / `class_weight`).
 3. **Model Families:** Regularized Linear Models (Logistic Regression), Bagging (Random Forest), Gradient Boosting (XGBoost & LightGBM), and Deep Neural Networks (Multi-Layer Perceptron).
 
-# Exploratory Data Analysis
+## Exploratory Data Analysis
 
-## Customer Churn Dynamics by Tenure
+### Customer Churn Dynamics by Tenure
 
 <div align="center">
 
