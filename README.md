@@ -141,6 +141,43 @@ The exploratory analysis of customer tenure (`tenure`) reveals a strong inverse 
 
 ---
 
+## Exploratory Data Analysis (EDA): Early-Stage Churn Dynamics
+
+To understand the critical attrition windows, customer churn rate was evaluated across different tenure thresholds. The zoom-in analysis for the initial 25 months reveals distinct behavioral phases during the customer lifecycle.
+
+<div align="center">
+
+![churnrate](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/churnrate3.png)
+
+</div>
+
+### Visual Analysis: Churn Rate (%) (Month 0 - 25 Zoom-In)
+
+- **Peak Churn Cliff (Month 1):** Customer churn spikes dramatically to its highest point at **Month 1 (~62%)**, indicating an immediate post-onboarding drop-off.
+- **The Early-Stage Danger Zone (Months 0–5):** Throughout the first 5 months, the churn rate remains alarmingly high, plateauing between **47% and 48%**. Over nearly half of newly acquired customers terminate their service within this window.
+- **Post-Early Decay (Months 6–25):** Beyond Month 5, the churn rate drops below **40%**, displaying a gradual downward trend toward **20%–30%** as customer relationships mature.
+
+---
+
+### Core Business Insights & Root Cause Analysis
+
+1. **Onboarding Friction & Expectation Mismatch:**
+   - The extreme spike at Month 1 strongly points to severe friction during initial setup, unexpected first-bill charges, or misaligned expectations created during sales acquisition.
+2. **First Contract Termination Risk:**
+   - The sustained high churn (~48%) through Month 5 highlights that customers under month-to-month contracts evaluate service quality immediately and exit quickly if initial issues are unresolved.
+3. **Diminishing Attrition Risk:**
+   - Once customers survive past Month 5, their likelihood of churning drops by over **15–20 percentage points**, confirming that retention interventions yield the highest return on investment (ROI) when executed early.
+
+---
+
+### Actionable Business Recommendations
+
+- **Immediate Onboarding Intervention:** Establish proactive customer success touchpoints (e.g., automated welcome calls, digital onboarding guides) within the first **7–14 days** of subscription.
+- **First-Bill Transparency:** Audit pricing structures to eliminate first-invoice surprises, which are a primary catalyst for Month 1 cancellations.
+- **Targeted Month 1–5 Retention Incentives:** Focus retention budgets on early-stage accounts by offering loyalty discounts or free feature add-ons specifically during Months 1 to 5 to bridge users past the critical retention cliff.
+
+---
+
 ## Technical Pipeline & Experiment Architecture
 
 ```mermaid
