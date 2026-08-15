@@ -182,6 +182,12 @@ To understand the critical attrition windows, customer churn rate was evaluated 
 
 Before executing machine learning pipeline experiments, the target class distribution ($y = \text{Churn}$) was analyzed to determine dataset balance and guide imbalance mitigation strategies.
 
+<div align="center">
+
+![churnrate](https://github.com/mherlypratama/Churn-Prediction/blob/main/output/rasio1.png)
+
+</div>
+
 ### Visual Analysis: Overall Customer Churn Ratio
 
 - **Retained Customers (Class 0):** Represent the clear majority of the dataset at **73.5% (5,174 customers)**.
